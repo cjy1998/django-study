@@ -16,13 +16,7 @@ Including another URLconf
 """
 
 from django.urls import path, include
-from user import urls as user_urls
-from student import urls as student_urls
-from teacher import urls as teacher_urls
-from lessons import urls as lessons_urls
+# from orm import urls
 urlpatterns = [
-   path('user/', include(user_urls, namespace='user')),
-   path('student/',include(student_urls)),
-   path('teacher/',include(teacher_urls)),
-   path('lessons/',include(lessons_urls)),
+  path('orm/',include("orm.urls")),
 ]
