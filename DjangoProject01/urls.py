@@ -19,4 +19,5 @@ from django.urls import path, include
 # from orm import urls
 urlpatterns = [
   path('orm/',include("orm.urls")),
+  path('dbw/',include("dbw.urls")),
 ]

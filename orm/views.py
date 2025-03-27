@@ -127,3 +127,42 @@ class ArticleView(View):
             article.author = author
             article.save()
         return JsonResponse({'msg':'5'})
+
+class Teacher(View):
+    def get1(self, request):
+        # 添加模型
+        #先添加分别实体模型  然后确定关系
+        teacher = models.Teacher.objects.create(
+            name="李四",
+            age = 10,
+            sex=True
+        )
+        course = models.Course.objects.create(
+            name="物理"
+        )
+        course.teacher.add(teacher)
+        return  JsonResponse({'msg':'6'})
+    def get(self,request):
+        # 先查主模型，接着通过外键，查询外键模型的数据
+        # teacher = models.Teacher.objects.get(id = 2)
+        # print(teacher.course.all())
+
+        #使用其中一个模型作为条件，查询另一个模型的数据
+        # course_objs = models.Course.objects.filter(teacher__name="李四").all()
+        # print(course_objs)
+        return JsonResponse({'msg':'7'})
+
+class AreaView(View):
+    def get(self, request):
+        # 添加数据
+        area1 = models.Area.objects.create(name="河南省")
+        area2 = models.Area.objects.create(name="河北省")
+
+        area3 = models.Area.objects.create(name="郑州市",parent=area1)
+        area4 = models.Area.objects.create(name="开封市",parent=area1)
+        area5 = models.Area.objects.create(name="邯郸市",parent=area2)
+
+        area6 = models.Area.objects.create(name="二七区",parent=area3)
+        area1 = models.Area.objects.create(name="管城区",parent=area3)
+
+        return JsonResponse({'msg':'8'})
